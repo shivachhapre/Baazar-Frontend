@@ -4,12 +4,12 @@ import { useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
 import axios from 'axios';
 import { useCart } from '../../context/CartContext';
-import { useAuth } from '../../context/AuthContext';
+import { API_BASE_URL, useAuth } from '../../context/AuthContext';
 import './Checkout.css';
 
 const createOrder = async (orderData) => {
   const token = localStorage.getItem('token');
-  const { data } = await axios.post('http://localhost:5000/api/orders', orderData, {
+  const { data } = await axios.post(`${API_BASE_URL}/api/orders`, orderData, {
     headers: {
       Authorization: `Bearer ${token}`
     }

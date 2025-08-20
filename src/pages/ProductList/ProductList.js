@@ -3,6 +3,7 @@ import { useQuery } from 'react-query';
 import axios from 'axios';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import './ProductList.css';
+import { API_BASE_URL } from '../../context/AuthContext';
 
 const fetchProducts = async ({ queryKey }) => {
   const [, filters] = queryKey;
@@ -17,7 +18,7 @@ const fetchProducts = async ({ queryKey }) => {
   params.append('page', filters.page);
   params.append('limit', filters.limit);
 
-  const { data } = await axios.get(`http://localhost:5000/api/products?${params}`);
+  const { data } = await axios.get(`${API_BASE_URL}/api/products?${params}`);
   return data;
 };
 

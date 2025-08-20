@@ -3,12 +3,12 @@ import { useQuery, useMutation, useQueryClient } from "react-query";
 import { useForm } from "react-hook-form";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
-import { useAuth } from "../../context/AuthContext";
+import { API_BASE_URL, useAuth } from "../../context/AuthContext";
 import "./Profile.css";
 
 const fetchUserProfile = async () => {
   const token = localStorage.getItem("token");
-  const { data } = await axios.get("http://localhost:5000/api/users/profile", {
+  const { data } = await axios.get(`${API_BASE_URL}/api/users/profile`, {
     headers: { Authorization: `Bearer ${token}` },
   });
   return data;
@@ -16,7 +16,7 @@ const fetchUserProfile = async () => {
 
 const fetchUserOrders = async () => {
   const token = localStorage.getItem("token");
-  const { data } = await axios.get("http://localhost:5000/api/orders", {
+  const { data } = await axios.get(`${API_BASE_URL}/api/orders`, {
     headers: { Authorization: `Bearer ${token}` },
   });
   return data;
@@ -25,7 +25,7 @@ const fetchUserOrders = async () => {
 const updateUserProfile = async (profileData) => {
   const token = localStorage.getItem("token");
   const { data } = await axios.put(
-    "http://localhost:5000/api/auth/profile",
+    `${API_BASE_URL}/api/auth/profile`,
     profileData,
     {
       headers: { Authorization: `Bearer ${token}` },
@@ -37,7 +37,7 @@ const updateUserProfile = async (profileData) => {
 const changePassword = async (passwordData) => {
   const token = localStorage.getItem("token");
   const { data } = await axios.put(
-    "http://localhost:5000/api/auth/change-password",
+    `${API_BASE_URL}/api/auth/change-password`,
     passwordData,
     {
       headers: { Authorization: `Bearer ${token}` },
