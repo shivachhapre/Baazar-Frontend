@@ -55,12 +55,12 @@ const Checkout = () => {
 
   // Redirect to cart if empty
   React.useEffect(() => {
-    if (cartItems.length === 0) {
+    if (cartItems?.length === 0) {
       navigate('/cart');
     }
-  }, [cartItems.length, navigate]);
+  }, [cartItems, navigate]);
 
-  if (!isAuthenticated || cartItems.length === 0) {
+  if (!isAuthenticated || cartItems?.length === 0) {
     return <div className="loading">Loading...</div>;
   }
 
@@ -71,7 +71,7 @@ const Checkout = () => {
 
   const onSubmit = (data) => {
     const orderData = {
-      items: cartItems.map(item => ({
+      items: cartItems?.map(item => ({
         product: item.id,
         quantity: item.quantity,
         price: item.price
@@ -395,7 +395,7 @@ const Checkout = () => {
                   <div className="order-review">
                     <div className="review-section">
                       <h3>Items</h3>
-                      {cartItems.map((item) => (
+                      {cartItems?.map((item) => (
                         <div key={item.id} className="review-item">
                           <img src={item.image} alt={item.name} className="item-image" />
                           <div className="item-details">
@@ -449,7 +449,7 @@ const Checkout = () => {
             <h3>Order Summary</h3>
             
             <div className="summary-items">
-              {cartItems.map((item) => (
+              {cartItems?.map((item) => (
                 <div key={item.id} className="summary-item">
                   <span className="item-name">{item.name}</span>
                   <span className="item-quantity">×{item.quantity}</span>
